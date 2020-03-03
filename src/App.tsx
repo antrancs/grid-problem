@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Cell from './components/Cell';
 
 function App() {
+  const size = 5;
+
+  function renderCells() {
+    const cells: JSX.Element[] = [];
+
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        cells.push(<Cell key={i * size + j * size} />);
+      }
+    }
+    return cells;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="grid">{renderCells()}</div>
     </div>
   );
 }

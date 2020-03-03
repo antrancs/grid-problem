@@ -1,0 +1,12 @@
+.grid-cell {
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.grid-cell:nth-child(5n) {
+  border-right: 1px solid black;
+}
+
+.grid-cell:nth-last-child(-n + 5) {
+  border-bottom: 1px solid black;
+}
