@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './App.css';
 import Cell, { ICell } from './components/Cell';
 import {
@@ -10,6 +10,7 @@ import {
 function App() {
   const [size, setSize] = useState(5);
   const [cells, setCells] = useState<ICell[]>([]);
+  const currentSet = useRef<Set<number>>(new Set());
 
   const grid = useMemo(() => generateGrid(size), [size]);
 
@@ -25,7 +26,8 @@ function App() {
         cells.push({
           isHovered: false,
           index,
-          value
+          value,
+          text: ''
         });
       }
     }
@@ -34,32 +36,43 @@ function App() {
   }, [grid]);
 
   function handleCellHover(cellIndex: number) {
-    let currentSet: Set<number> = new Set();
-
+    currentSet.current = new Set();
     // Find the set the hovered cell belongs to
     for (const set of connectedAreaSets) {
       if (set.has(cellIndex)) {
-        currentSet = set;
+        currentSet.current = set;
         break;
       }
     }
 
     // highlight all cells in that set
     setCells(cells =>
-      cells.map(cell => {
-        return {
-          ...cell,
-          isHovered: currentSet.has(cell.index)
-        };
-      })
+      cells.map(cell => ({
+        ...cell,
+        isHovered: currentSet.current.has(cell.index)
+      }))
+    );
+  }
+
+  function handleCellClick(cellIndex: number) {
+    setCells(cells =>
+      cells.map(cell => ({
+        ...cell,
+        text: cell.index === cellIndex ? currentSet.current.size.toString() : ''
+      }))
     );
   }
 
   return (
     <div className="container">
-      <div className="grid">
+      <div className="grid" onMouseLeave={() => handleCellHover(-1)}>
         {cells.map(cell => (
-          <Cell key={cell.index} cell={cell} onHover={handleCellHover} />
+          <Cell
+            key={cell.index}
+            cell={cell}
+            onHover={handleCellHover}
+            onClick={handleCellClick}
+          />
         ))}
       </div>
     </div>
