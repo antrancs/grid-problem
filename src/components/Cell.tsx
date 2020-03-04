@@ -10,13 +10,13 @@ interface IProps {
 
 const Cell: FunctionComponent<IProps> = ({ value, order }) => {
   return (
-    <div
+    <button
       className={classnames('grid-cell', {
         'grid-cell--active': value === 1
       })}
     >
       {value} ({order})
-    </div>
+    </button>
   );
 };
 

@@ -1,6 +1,11 @@
 .grid-cell {
+  border: none;
   border-left: 1px solid black;
   border-top: 1px solid black;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .grid-cell--active {
