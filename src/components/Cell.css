@@ -12,6 +12,10 @@
   background-color: bisque;
 }
 
+.grid-cell--hover {
+  background-color: red;
+}
+
 .grid-cell:nth-child(5n) {
   border-right: 1px solid black;
 }

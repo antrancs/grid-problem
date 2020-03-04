@@ -2,6 +2,19 @@ export function getRandom(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+export function generateGrid(size: number) {
+  const grid: number[][] = [];
+  for (let row = 0; row < size; row++) {
+    grid[row] = [];
+    for (let col = 0; col < size; col++) {
+      grid[row][col] = getRandom(0, 1);
+    }
+  }
+
+  console.log(grid);
+  return grid;
+}
+
 export function getAllConnectedAreas(grid: number[][]) {
   const rows = grid.length;
   if (rows === 0) {
@@ -29,7 +42,7 @@ export function getAllConnectedAreas(grid: number[][]) {
     }
   }
 
-  return count;
+  return sets;
 }
 
 function dfs(
