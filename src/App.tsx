@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Cell from './components/Cell';
+import { getRandom } from './components/utils/utils';
 
 function App() {
   const size = 5;
@@ -8,9 +9,16 @@ function App() {
   function renderCells() {
     const cells: JSX.Element[] = [];
 
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        cells.push(<Cell key={i * size + j * size} />);
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        const random = getRandom(0, 1);
+        cells.push(
+          <Cell
+            key={row * size + col}
+            value={random}
+            order={row * size + col}
+          />
+        );
       }
     }
     return cells;

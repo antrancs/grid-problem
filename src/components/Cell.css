@@ -3,6 +3,10 @@
   border-top: 1px solid black;
 }
 
+.grid-cell--active {
+  background-color: bisque;
+}
+
 .grid-cell:nth-child(5n) {
   border-right: 1px solid black;
 }
