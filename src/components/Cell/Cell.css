@@ -1,0 +1,49 @@
+.cell {
+  border: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  border: 0.5px solid rgba(0, 0, 0, 0.6);
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell--active {
+  background-color: bisque;
+}
+
+.cell--hover {
+  background-color: red;
+}
+
+.cell__left-edge,
+.cell__bottom-edge {
+  position: relative;
+}
+
+.cell__left-edge:before,
+.cell__bottom-edge::after {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  border: 0.5px solid rgba(0, 0, 0, 0.6);
+}
+
+.cell__left-edge:before {
+  width: 20px;
+  height: 100%;
+  left: -21px;
+  transform: skewy(-45deg);
+  transform-origin: center right;
+}
+
+.cell__bottom-edge::after {
+  width: 100%;
+  height: 20px;
+  bottom: -21px;
+  transform: skew(-45deg);
+  transform-origin: center top;
+}

@@ -1,11 +1,12 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import './App.css';
-import Cell, { ICell } from './components/Cell';
+import Cell, { ICell } from './components/Cell/Cell';
 import {
   getAllConnectedAreas,
   getIndexInGrid,
   generateGrid
 } from './utils/utils';
+import Slider from './components/Slider/Slider';
 
 function App() {
   const [size, setSize] = useState(5);
@@ -64,7 +65,15 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={
+        {
+          '--grid-size': size
+        } as React.CSSProperties
+      }
+    >
+      <Slider onUpdateSize={setSize} />
       <div className="grid" onMouseLeave={() => handleCellHover(-1)}>
         {cells.map(cell => (
           <Cell
@@ -72,6 +81,7 @@ function App() {
             cell={cell}
             onHover={handleCellHover}
             onClick={handleCellClick}
+            gridSize={size}
           />
         ))}
       </div>

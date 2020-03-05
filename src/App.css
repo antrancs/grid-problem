@@ -1,13 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
 .grid {
-  width: 400px;
+  width: 500px;
   max-width: 50%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  grid-template-rows: repeat(var(--grid-size), 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 400px;
+  height: 500px;
   margin: 60px auto;
+  transform: rotate(-30deg) skew(20deg);
+  position: relative;
 }
 
 .container {
