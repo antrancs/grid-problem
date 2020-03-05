@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 
 import classnames from 'classnames';
 import './Cell.css';
@@ -30,7 +30,6 @@ const Cell: FunctionComponent<IProps> = ({
   gridSize
 }) => {
   // The last-gridSize cells are at the bottom
-
   const isBottomEdge = () => gridSize * gridSize - gridSize <= index;
 
   const { value, index, text } = cell;
@@ -54,4 +53,4 @@ const Cell: FunctionComponent<IProps> = ({
   );
 };
 
-export default Cell;
+export default memo(Cell);

@@ -1,5 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 
+import './Slider.css';
+
 interface IProps {
   onUpdateSize: (size: number) => void;
 }
@@ -16,7 +18,7 @@ const Slider: FunctionComponent<IProps> = ({ onUpdateSize }) => {
         onChange={event => setSizeRange(+event.target.value)}
         value={sizeRange}
       />
-      <button onClick={() => onUpdateSize(sizeRange)}>
+      <button className="slider-btn" onClick={() => onUpdateSize(sizeRange)}>
         Create {sizeRange}x{sizeRange}
       </button>
     </section>

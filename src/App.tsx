@@ -1,16 +1,29 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useRef,
+  useCallback
+} from 'react';
+
 import './App.css';
 import Cell, { ICell } from './components/Cell/Cell';
 import {
   getAllConnectedAreas,
   getIndexInGrid,
-  generateGrid
+  generateGrid,
+  lightenDarkenColor
 } from './utils/utils';
 import Slider from './components/Slider/Slider';
+import ColorPicker from './components/ColorPicker/ColorPicker';
 
 function App() {
   const [size, setSize] = useState(5);
   const [cells, setCells] = useState<ICell[]>([]);
+
+  const [cellColor, setCellColor] = useState('#FF8A65');
+
+  // Track the set the current hovered cell belongs to
   const currentSet = useRef<Set<number>>(new Set());
 
   const grid = useMemo(() => generateGrid(size), [size]);
@@ -55,6 +68,8 @@ function App() {
     );
   }
 
+  const memoHandleCellHover = useCallback(handleCellHover, [size]);
+
   function handleCellClick(cellIndex: number) {
     setCells(cells =>
       cells.map(cell => ({
@@ -64,26 +79,36 @@ function App() {
     );
   }
 
+  const memoHandleCellClick = useCallback(handleCellClick, [size]);
+
   return (
-    <div
-      className="container"
-      style={
-        {
-          '--grid-size': size
-        } as React.CSSProperties
-      }
-    >
-      <Slider onUpdateSize={setSize} />
-      <div className="grid" onMouseLeave={() => handleCellHover(-1)}>
-        {cells.map(cell => (
-          <Cell
-            key={cell.index}
-            cell={cell}
-            onHover={handleCellHover}
-            onClick={handleCellClick}
-            gridSize={size}
-          />
-        ))}
+    <div className="container">
+      <div
+        className="page-content"
+        style={
+          {
+            '--cell-color': cellColor,
+            '--cell-color-bright': lightenDarkenColor(cellColor, 20),
+            '--grid-size': size
+          } as React.CSSProperties
+        }
+      >
+        <div>
+          <Slider onUpdateSize={setSize} />
+
+          <ColorPicker onColorChanged={setCellColor} color={cellColor} />
+        </div>
+        <div className="grid" onMouseLeave={() => handleCellHover(-1)}>
+          {cells.map(cell => (
+            <Cell
+              key={cell.index}
+              cell={cell}
+              onHover={memoHandleCellHover}
+              onClick={memoHandleCellClick}
+              gridSize={size}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

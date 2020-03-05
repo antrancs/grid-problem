@@ -3,20 +3,25 @@
 }
 
 .grid {
-  width: 500px;
+  width: 450px;
   max-width: 50%;
   display: grid;
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-template-rows: repeat(var(--grid-size), 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 500px;
+  height: 450px;
   margin: 60px auto;
-  transform: rotate(-30deg) skew(20deg);
+  transform: rotate(-30deg) skew(20deg) translateY(100px);
   position: relative;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.page-content {
+  display: flex;
+  align-items: center;
 }

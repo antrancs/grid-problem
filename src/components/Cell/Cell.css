@@ -12,11 +12,11 @@
 }
 
 .cell--active {
-  background-color: bisque;
+  background-color: var(--cell-color);
 }
 
 .cell--hover {
-  background-color: red;
+  background-color: var(--cell-color-bright);
 }
 
 .cell__left-edge,
