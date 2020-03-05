@@ -9,6 +9,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+}
+
+.cell::before {
+  content: '';
+  padding-bottom: 100%;
 }
 
 .cell--active {
@@ -34,8 +40,8 @@
 
 .cell__left-edge:before {
   width: 20px;
-  height: 100%;
   left: -21px;
+  top: 0;
   transform: skewy(-45deg);
   transform-origin: center right;
 }
